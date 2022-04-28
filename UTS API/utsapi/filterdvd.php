@@ -11,7 +11,7 @@
     $id = $_GET['id'];
 
     //string untuk query
-    $sql = "SELECT * FROM tjenisbarang JOIN tbarang WHERE kdJenisBarang=$id ORDER BY kdJenisbarang";
+    $sql = "SELECT * FROM tjenisbarang INNER JOIN tbarang WHERE tjenisbarang.Jenis=$id";
 
     //JALANKAN QUERY
     $r = mysqli_query($conn,$sql);

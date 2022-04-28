@@ -7,12 +7,8 @@
 		//echo("KONEKSI SUKSES");
 	}
 
-    //FILTER DATA MHS PER NIM (id)
-    $kota = $_GET['kota'];
-    $jk = $_GET['jk'];
-
     //string untuk query
-    $sql = "SELECT * FROM tpegawai WHERE kota=$kota AND jk=$jk ";
+    $sql = "SELECT tbarang.jenis kdBarang, tjenisbarang.Jenis, COUNT(tjenisbarang.Jenis) AS jumlah FROM tbarang INNER JOIN tjenisbarang GROUP BY tjenisbarang.Jenis";
 
     //JALANKAN QUERY
     $r = mysqli_query($conn,$sql);
@@ -22,9 +18,9 @@
 
     while($row = mysqli_fetch_array($r)){
         array_push($result, array(
-            "nama"=>$row['nama'],
-            "kota"=>$row['Kota'],
-            "jenis kelamin"=>$row['jk']
+            "kode"=>$row['kdBarang'],
+            "jenis"=>$row['Jenis'],
+            "jumlah"=>$row['jumlah']
         ));
     }
     echo json_encode($result);
